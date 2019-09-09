@@ -12,4 +12,12 @@ module.exports = {
     filename: "[name].js",
   },
   mode: "production",
+  module: {
+    rules: [
+      {
+        test: /.js$/,
+        use: "babel-loader",
+      },
+    ],
+  },
 };
