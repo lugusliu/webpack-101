@@ -3,11 +3,18 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 
+import logo from "./assets/img/github.png";
 import "./search.less";
 
 class Search extends Component {
   render() {
-    return <div className="search-text">Search Text</div>;
+    return (
+      <div className="search-text">
+        搜索
+        <img src={logo} alt="logo" />
+        Search Text
+      </div>
+    );
   }
 }
 
