@@ -2,6 +2,7 @@
 
 const path = require("path");
 const webpack = require("webpack");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
   entry: {
@@ -44,7 +45,7 @@ module.exports = {
       },
     ],
   },
-  plugins: [new webpack.HotModuleReplacementPlugin()],
+  plugins: [new webpack.HotModuleReplacementPlugin(), new CleanWebpackPlugin()],
   devServer: {
     contentBase: "./dist",
     hot: true,
