@@ -27,7 +27,28 @@ module.exports = {
       },
       {
         test: /\.less$/,
-        use: ["style-loader", "css-loader", "less-loader"],
+        use: [
+          "style-loader",
+          "css-loader",
+          "less-loader",
+          {
+            loader: "postcss-loader",
+            options: {
+              plugins: () => [
+                require("autoprefixer")({
+                  browsers: ["last 2 version", ">1%", "ios 7"],
+                }),
+              ],
+            },
+          },
+          {
+            loader: "px2rem-loader",
+            options: {
+              remUnit: 75,
+              remPrecision: 8,
+            },
+          },
+        ],
       },
       {
         test: /\.(png|jpg|gif|jpeg)$/,

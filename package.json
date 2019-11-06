@@ -37,6 +37,7 @@
     "mini-css-extract-plugin": "^0.8.0",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
     "postcss-loader": "^3.0.0",
+    "px2rem-loader": "^0.1.9",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "style-loader": "^1.0.0",
@@ -44,5 +45,8 @@
     "webpack": "^4.39.3",
     "webpack-cli": "^3.3.7",
     "webpack-dev-server": "^3.8.1"
+  },
+  "dependencies": {
+    "lib-flexible": "^0.3.2"
   }
 }
