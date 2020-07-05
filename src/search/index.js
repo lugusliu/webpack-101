@@ -3,8 +3,8 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 
-import logo from "./assets/img/github.png";
-import "./search.less";
+import logo from "../assets/img/github.png";
+import "./index.less";
 
 class Search extends Component {
   render() {
