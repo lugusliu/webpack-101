@@ -66,16 +66,7 @@ module.exports = {
           MiniCssExtractPlugin.loader,
           "css-loader",
           "less-loader",
-          {
-            loader: "postcss-loader",
-            options: {
-              plugins: () => [
-                require("autoprefixer")({
-                  browsers: ["last 2 version", ">1%", "ios 7"]
-                })
-              ]
-            }
-          },
+          "postcss-loader",
           {
             loader: "px2rem-loader",
             options: {
