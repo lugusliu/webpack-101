@@ -22,7 +22,7 @@ const setMPA = () => {
       new HtmlWebpackPlugin({
         template: path.join(__dirname, `src/${pageName}/index.html`),
         filename: `${pageName}.html`,
-        chunks: [pageName],
+        chunks: ["commons", pageName],
         inject: true,
         minify: {
           html5: true,
@@ -111,20 +111,32 @@ module.exports = {
       cssProcessor: require("cssnano")
     }),
     ...htmlWebpackPlugins,
-    new CleanWebpackPlugin(),
-    new HtmlWebpackExternalsPlugin({
-      externals: [
-        {
-          module: "react",
-          entry: "https://11.url.cn/now/lib/16.2.0/react.min.js",
-          global: "React"
-        },
-        {
-          module: "react-dom",
-          entry: "https://11.url.cn/now/lib/16.2.0/react-dom.min.js",
-          global: "ReactDOM"
+    new CleanWebpackPlugin()
+    // new HtmlWebpackExternalsPlugin({
+    //   externals: [
+    //     {
+    //       module: "react",
+    //       entry: "https://11.url.cn/now/lib/16.2.0/react.min.js",
+    //       global: "React"
+    //     },
+    //     {
+    //       module: "react-dom",
+    //       entry: "https://11.url.cn/now/lib/16.2.0/react-dom.min.js",
+    //       global: "ReactDOM"
+    //     }
+    //   ]
+    // })
+  ],
+  optimization: {
+    splitChunks: {
+      minSize: 0,
+      cacheGroups: {
+        commons: {
+          name: "commons",
+          chunks: "all",
+          minChunks: 2
         }
-      ]
-    })
-  ]
+      }
+    }
+  }
 };
