@@ -23,6 +23,7 @@
   "homepage": "https://github.com/lugusliu/webpack-101#readme",
   "devDependencies": {
     "@babel/core": "^7.10.4",
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
     "@babel/preset-env": "^7.10.4",
     "@babel/preset-react": "^7.10.4",
     "autoprefixer": "^9.8.4",
