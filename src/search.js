@@ -13,6 +13,7 @@ class Search extends Component {
         搜d索ss
         <img src={logo} alt="logo" />
         Search Text
+        <div className="test">测试数据</div>
       </div>
     );
   }

@@ -9,22 +9,22 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 module.exports = {
   entry: {
     index: "./src/index.js",
-    search: "./src/search.js",
+    search: "./src/search.js"
   },
   output: {
     path: path.join(__dirname, "dist"),
-    filename: "[name]_[chunkhash:8].js",
+    filename: "[name]_[chunkhash:8].js"
   },
   mode: "production",
   module: {
     rules: [
       {
         test: /\.js$/,
-        use: "babel-loader",
+        use: "babel-loader"
       },
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader"],
+        use: [MiniCssExtractPlugin.loader, "css-loader"]
       },
       {
         test: /\.less$/,
@@ -37,19 +37,19 @@ module.exports = {
             options: {
               plugins: () => [
                 require("autoprefixer")({
-                  browsers: ["last 2 version", ">1%", "ios 7"],
-                }),
-              ],
-            },
+                  browsers: ["last 2 version", ">1%", "ios 7"]
+                })
+              ]
+            }
           },
           {
             loader: "px2rem-loader",
             options: {
               remUnit: 75,
-              remPrecision: 8,
-            },
-          },
-        ],
+              remPrecision: 8
+            }
+          }
+        ]
       },
       {
         test: /\.(png|jpg|gif|jpeg)$/,
@@ -57,24 +57,24 @@ module.exports = {
           {
             loader: "file-loader",
             options: {
-              name: "[name]_[hash:8].[ext]",
-            },
-          },
-        ],
+              name: "[name]_[hash:8].[ext]"
+            }
+          }
+        ]
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
-        use: "file-loader",
-      },
-    ],
+        use: "file-loader"
+      }
+    ]
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: "[name]_[contenthash:8].css",
+      filename: "[name]_[contenthash:8].css"
     }),
     new OptimizeCSSAssetsPlugin({
       assetNameRegExp: /\.css$/g,
-      cssProcessor: require("cssnano"),
+      cssProcessor: require("cssnano")
     }),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, "src/index.html"),
@@ -87,8 +87,8 @@ module.exports = {
         preserveLineBreaks: false,
         minifyCSS: true,
         minifyJS: true,
-        removeComments: false,
-      },
+        removeComments: false
+      }
     }),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, "src/search.html"),
@@ -101,9 +101,9 @@ module.exports = {
         preserveLineBreaks: false,
         minifyCSS: true,
         minifyJS: true,
-        removeComments: false,
-      },
+        removeComments: false
+      }
     }),
-    new CleanWebpackPlugin(),
-  ],
+    new CleanWebpackPlugin()
+  ]
 };
