@@ -11,6 +11,7 @@ const FriendlyErrorsWebpackPlugin = require("friendly-errors-webpack-plugin");
 const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 const TerserPlugin = require("terser-webpack-plugin");
+const HardSourceWebpackPlugin = require("hard-source-webpack-plugin");
 
 const smp = new SpeedMeasurePlugin();
 
@@ -67,7 +68,7 @@ module.exports = smp.wrap({
               workers: 3
             }
           },
-          "babel-loader"
+          "babel-loader?cacheDirectory=true"
         ]
       },
       {
@@ -130,7 +131,8 @@ module.exports = smp.wrap({
         }
       });
     },
-    new BundleAnalyzerPlugin()
+    new BundleAnalyzerPlugin(),
+    new HardSourceWebpackPlugin()
     // new HtmlWebpackExternalsPlugin({
     //   externals: [
     //     {
@@ -149,7 +151,8 @@ module.exports = smp.wrap({
   optimization: {
     minimizer: [
       new TerserPlugin({
-        parallel: true
+        parallel: true,
+        cache: true
       })
     ],
     splitChunks: {
