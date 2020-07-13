@@ -10,6 +10,7 @@ const HtmlWebpackExternalsPlugin = require("html-webpack-externals-plugin");
 const FriendlyErrorsWebpackPlugin = require("friendly-errors-webpack-plugin");
 const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
+const TerserPlugin = require("terser-webpack-plugin");
 
 const smp = new SpeedMeasurePlugin();
 
@@ -146,6 +147,11 @@ module.exports = smp.wrap({
     // })
   ],
   optimization: {
+    minimizer: [
+      new TerserPlugin({
+        parallel: true
+      })
+    ],
     splitChunks: {
       minSize: 0,
       cacheGroups: {
