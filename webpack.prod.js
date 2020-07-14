@@ -12,9 +12,12 @@ const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 const TerserPlugin = require("terser-webpack-plugin");
 const HardSourceWebpackPlugin = require("hard-source-webpack-plugin");
+const PurgecssPlugin = require("purgecss-webpack-plugin");
 
 const smp = new SpeedMeasurePlugin();
-
+const PATHS = {
+  src: path.join(__dirname, "src")
+};
 const setMPA = () => {
   const entry = {};
   const htmlWebpackPlugins = [];
@@ -133,7 +136,10 @@ module.exports = smp.wrap({
       });
     },
     new BundleAnalyzerPlugin(),
-    new HardSourceWebpackPlugin()
+    new HardSourceWebpackPlugin(),
+    new PurgecssPlugin({
+      paths: glob.sync(`${PATHS.src}/**/*`, { nodir: true })
+    })
     // new HtmlWebpackExternalsPlugin({
     //   externals: [
     //     {
