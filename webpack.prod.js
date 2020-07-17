@@ -32,7 +32,7 @@ const setMPA = () => {
       new HtmlWebpackPlugin({
         template: path.join(__dirname, `src/${pageName}/index.html`),
         filename: `${pageName}.html`,
-        chunks: ["commons", pageName],
+        chunks: ["vendors", "commons", pageName],
         inject: true,
         minify: {
           html5: true,
@@ -57,7 +57,7 @@ module.exports = smp.wrap({
   entry,
   output: {
     path: path.join(__dirname, "dist"),
-    filename: "./js/[name]_[chunkhash:8].js"
+    filename: "js/[name]_[chunkhash:8].js"
   },
   mode: "production",
   module: {
@@ -77,7 +77,12 @@ module.exports = smp.wrap({
       },
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader"]
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader
+          },
+          "css-loader"
+        ]
       },
       {
         test: /\.less$/,
@@ -99,9 +104,12 @@ module.exports = smp.wrap({
         test: /\.(png|jpg|gif|jpeg)$/,
         use: [
           {
-            loader: "file-loader",
+            loader: "url-loader",
             options: {
-              name: "./img/[name]_[hash:8].[ext]"
+              limit: 8192,
+              outputPath: "img",
+              publicPath: "../img",
+              name: "[name]_[hash:8].[ext]"
             }
           }
         ]
@@ -112,7 +120,9 @@ module.exports = smp.wrap({
           {
             loader: "file-loader",
             options: {
-              name: "./fonts/[name]_[hash:8].[ext]"
+              outputPath: "fonts",
+              publicPath: "../fonts",
+              name: "[name]_[hash:8].[ext]"
             }
           }
         ]
@@ -121,7 +131,7 @@ module.exports = smp.wrap({
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: "./css/[name]_[contenthash:8].css"
+      filename: "css/[name]_[contenthash:8].css"
     }),
     new OptimizeCSSAssetsPlugin({
       assetNameRegExp: /\.css$/g,
@@ -143,7 +153,9 @@ module.exports = smp.wrap({
       });
     },
     // new BundleAnalyzerPlugin(),
-    new HardSourceWebpackPlugin(),
+    new HardSourceWebpackPlugin([
+      { test: /mini-css-extract-plugin[\\/]dist[\\/]loader/ }
+    ]),
     new PurgecssPlugin({
       paths: glob.sync(`${PATHS.src}/**/*`, { nodir: true })
     })
@@ -172,10 +184,16 @@ module.exports = smp.wrap({
     splitChunks: {
       minSize: 0,
       cacheGroups: {
+        vendors: {
+          name: "vendors",
+          test: /[\\\/]node_modules[\\\/]/,
+          chunks: "initial"
+        },
         commons: {
           name: "commons",
-          chunks: "all",
-          minChunks: 2
+          minChunks: 2,
+          chunks: "initial",
+          reuseExistingChunk: true
         }
       }
     }
