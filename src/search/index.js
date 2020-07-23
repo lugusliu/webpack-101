@@ -1,28 +1,29 @@
-"use strict";
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 
-import React, { Component } from "react";
-import ReactDOM from "react-dom";
+import logo from '../assets/img/github.png';
+import './index.less';
+import common from '../../common';
+import { a } from './tree-shaking';
 
-import logo from "../assets/img/github.png";
-import "./index.less";
-import { common } from "../../common";
-import { a } from "./tree-shaking";
-console.log(common());
+(common());
 
 class Search extends Component {
   constructor() {
     super();
     this.state = {
-      Text: null
+      Text: null,
     };
   }
+
   loadComponent() {
-    import("./text").then(Text => {
+    import('./text').then((Text) => {
       this.setState({
-        Text: Text.default
+        Text: Text.default,
       });
     });
   }
+
   render() {
     const funcA = a();
     const { Text } = this.state;
@@ -41,4 +42,4 @@ class Search extends Component {
   }
 }
 
-ReactDOM.render(<Search></Search>, document.getElementById("root"));
+ReactDOM.render(<Search />, document.getElementById('root'));

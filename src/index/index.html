@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    ${require('raw-loader!./meta.html')}
-    <title>index page</title>
-    <script>
-      ${require('raw-loader!babel-loader!../../node_modules/amfe-flexible/index.min.js')}
-    </script>
-  </head>
-  <body>
-    <div class="test2">测试px2rem</div>
-    <div class="test3"></div>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  ${require('raw-loader!./meta.html')}
+  <title>index page</title>
+  <script>
+    ${ require('raw-loader!babel-loader!../../node_modules/amfe-flexible/index.min.js') }
+  </script>
+</head>
+
+<body>
+  <div class="test2">测试px2rem</div>
+  <div class="test3"></div>
+</body>
+
 </html>

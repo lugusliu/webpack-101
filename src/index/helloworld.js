@@ -1,3 +1,5 @@
-export function helloworld() {
-  return "Hello Webpack";
+function helloworld() {
+  return 'Hello Webpack';
 }
+
+export default helloworld;

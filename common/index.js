@@ -1,3 +1,5 @@
-export function common() {
-  return "common module";
+function common() {
+  return 'common module';
 }
+
+export default common;
